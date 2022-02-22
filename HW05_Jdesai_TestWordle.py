@@ -3,40 +3,40 @@ import HW05_Jdesai_Wordle
 
 class wordle_test(unittest.TestCase):
 
-    def test_get_init(self):
-            result = HW05_Jdesai_Wordle.get_init()
-            self.assertEqual(result)
-
-    def test_get_word(self):
+    def test1_get_word(self):
             result = HW05_Jdesai_Wordle.get_word()
             self.assertEqual(result)
 
-    def test_get_user_input(self):
-            result = HW05_Jdesai_Wordle.has_user_guessed_the_right_word()
+    def test2_get_user_input(self):
+            result = HW05_Jdesai_Wordle.get_user_input()
             self.assertEqual(result)
 
-    def test_check_if_entered_word_is_valid(self):
-            result = HW05_Jdesai_Wordle.check_if_entered_word_is_valid()
+    def test3_get_if_entered_word_is_valid(self):
+            result = HW05_Jdesai_Wordle.get_if_entered_word_is_valid()
             self.assertEqual(result)
 
-    def test_user_guessed_the_right_word(self):
-            result = HW05_Jdesai_Wordle.has_user_guessed_the_right_word()
+    def test4_get_user_guessed_right_word(self):
+            result = HW05_Jdesai_Wordle.get_user_guessed_right_word()
             self.assertEqual(result)
 
-    def test_check_valid_word(self):
-            result = HW05_Jdesai_Wordle.check_if_entered_word_is_valid()
+    def test5_get_check_valid_word(self):
+            result = HW05_Jdesai_Wordle.get_check_valid_word()
             self.assertEqual(result)
 
-    def test_get_spot_name(self):
+    def test6_get_spot_name(self):
             result = HW05_Jdesai_Wordle.get_spot_name()
             self.assertEqual(result)
 
-    def test_check_word_in_dictionary(self):
-            result = HW05_Jdesai_Wordle.check_if_word_in_dictionary()
+    def test7_get_check_word_in_dictionary(self):
+            result = HW05_Jdesai_Wordle.get_check_if_word_in_dictionary()
             self.assertEqual(result)
 
-    def test_get_final(self):
-            result = HW05_Jdesai_Wordle.get_spot_name()
+    def test8_get_position_check_for_letters(self):
+            result = HW05_Jdesai_Wordle.get_position_check_for_letters()
+            self.assertEqual(result)
+
+    def validate_letter_position(self):
+            result = HW05_Jdesai_Wordle.get_position_check_for_letters()
             self.assertEqual(result)
 
 if __name__ == '__main__':
