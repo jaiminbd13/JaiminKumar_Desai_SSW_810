@@ -1,5 +1,9 @@
-from ui import *
+from HW05_Jdesai_Wordle import *
 from dictionary import *
+
+
+def get_random_word():
+    pass
 
 
 def main():
