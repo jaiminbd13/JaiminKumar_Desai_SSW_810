@@ -1,7 +1,7 @@
 import random
 
 
-def get_random_word():
+def get_word():
     with open('words.txt', 'r+') as file_pointer:
         content = file_pointer.read().split('\n')
         random_word = content[random.randint(0, len(content) - 1)]
