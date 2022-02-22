@@ -35,8 +35,8 @@ class wordle_test(unittest.TestCase):
             result = HW05_Jdesai_Wordle.get_position_check_for_letters()
             self.assertEqual(result)
 
-    def validate_letter_position(self):
-            result = HW05_Jdesai_Wordle.get_position_check_for_letters()
+    def test9_validate_letter_position(self):
+            result = HW05_Jdesai_Wordle.validate_letter_position()
             self.assertEqual(result)
 
 if __name__ == '__main__':
