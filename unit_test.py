@@ -1,8 +1,6 @@
 import unittest
 import dictionary
-import wordle
 import ui
-
 
 class Test_wordle(unittest.TestCase):
 
