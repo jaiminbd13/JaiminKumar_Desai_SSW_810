@@ -1,12 +1,48 @@
 import random
 import logging
+import csv
+from collections import  OrderedDict
 class wordle:
 
+    def valid_words(self):
+        with open('words.txt', 'r+') as f_pointer:
+            content = f_pointer.read().split('\n')
+            f_pointer.close()
+            words = []
+            for word in content:
+                if len(word) != 5:
+                    continue
+                words.append(word)
+            return words
+
+    def words_list_to_file(list):
+        with open('valid_words.txt', 'w') as f_pointer:
+            f_pointer.writelines([str(i) + '\n' for i in list])
+            f_pointer.close()
+
+    def order(trials, user_input):  # function making file for storing in csv
+        letter_list = OrderedDict()
+        alphabet = [str(i) for i in 'abcdefghijklmnopqrstuvwxyz']  # comparing every to every letters
+        for letter in alphabet:
+            letter_list[letter] = [0, 0, 0, 0, 0]  #all index frequency
+        while trials > 0:
+            user_input = input('Enter a word: ')  #each nd every trials
+            for index in range(len(user_input)):
+                temp = letter_list[user_input[index]]
+                index = index + 1
+            trials -= 5
+            for letter in letter_list:
+                different_letters = ('%s -> %s' % (letter, letter_list[letter]))  # seperate letter and occurence
+
+            with open('letterFrequency.csv', 'w') as csv_files:  # adding in csv files
+                writer = csv.DictWriter(csv_files, fieldnames=letter_list.keys())  # writing into csv files the letters
+                # and occurance
+                writer.writeheader()
+                writer.writerows(letter_list)  # outputs
+
     def get_input_from_user(trial):
-        try
         prompt_message = 'Enter a word: ' if trial > 5 else 'Reenter a word: '
         return input(prompt_message)
-
 
     def check_if_entered_word_is_valid(word):
         return word.isalpha() and len(word) == 5
