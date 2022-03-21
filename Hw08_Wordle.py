@@ -1,6 +1,5 @@
 import random
 import logging
-import csv
 from collections import  OrderedDict
 
 class wordle:
