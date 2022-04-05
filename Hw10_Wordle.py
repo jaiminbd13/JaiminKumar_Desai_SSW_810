@@ -23,9 +23,6 @@ class wordle:
         print("setter method")
         self.word = wordle
 
-    # Before using setter
-    print(self.set_words())
-
     # After using setter
     final_word.wordle(2019)
     print(final_word.wordle)
@@ -181,8 +178,79 @@ def check_if_word_in_dictionary(word):
         content = file_pointer.read().split('\n')
         is_word_present = word in content
         file_pointer.close()
-        log_to_file('info', 'word is in the file')
+        log_to_file('info', 'words are in the file')
         return is_word_present
+
+def assess_word(self, test_words):
+
+        Target = list(self.Target_word)
+        matched_count = dict(int)
+        Rules = [None] * self.word_length
+        # Test test_words for the "exact match" and "excluded letter" Rules.
+        for i, letter in enumerate(test_words):
+            if letter == Target[i]:
+                Rules[i] = RuleMatch(letter, i)
+                Target[i] = '*'
+                matched_count[letter] += 1
+            elif letter not in Target:
+                Rules[i] = RuleExcludedLetter(letter, i)
+
+        for i, letter in enumerate(test_words):
+            if Rules[i]:
+                continue
+            if letter in Target:
+                #exact matches have already been filtered.
+                Rules[i] = RuleContainsElsewhere(letter, i)
+                Target[Target.index(letter)] = '*'
+                matched_count[letter] += 1
+            else:
+                Rules[i] = RuleExcludedLetter(letter, i)
+
+        rule_str = ''.join(rule.code for rule in Rules)
+        return Rules, matched_count, rule_str
+
+
+def parsed_rule_code(self, rule_code, test_words):
+        Rules = []
+        matched_count = dict(int)
+        for i, letter in enumerate(test_words):
+            Rules.append(RuleCls[rule_code[i]](letter, i))
+            if rule_code[i] in '+=':
+                matched_count[letter] += 1
+        return Rules, matched_count
+
+def apply_Rule(self, Rules, matched_count):
+        for rule in Rules:
+            self.words = rule.apply(self.words, matched_count)
+
+
+def get_test_words(self):
+        k = random.choice(range(len(self.words)))
+        return self.words[k], k
+
+
+def get_Rules_Input(self, test_words):
+        return input(f'Try the words "{test_words}": ')
+
+
+def Interact(self):
+        j = 0
+        init = First_Word, self.words.index(First_Word)
+        while len(self.words) > 1:
+            test_words, k = self.get_test_words() if j else init
+            j += 1
+            rule_code = self.get_Rules_Input(test_words)
+            Rules, matched_count = self.parsed_rule_code(rule_code,test_words)
+            self.apply_Rule(Rules, matched_count)
+
+            if len(self.words) == 0:
+                sys.exit('made a mistake: no words match this set'
+                         ' of Rules.')
+            elif len(self.words) == 1:
+                break
+            if test_words in self.words:
+                del self.words[self.words.index(test_words)]
+        print(f'The word is {self.words[0]}, found in {j} attempts.')
 
 def __str__(self):
     return 'a {self.words}wordle'
@@ -190,4 +258,5 @@ def __str__(self):
 
 if __name__=='__main__':
     game=WordleGame()
+    wordle.interact()
     print(game.__str__())
