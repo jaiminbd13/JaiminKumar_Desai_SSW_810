@@ -19,7 +19,7 @@ class wordle_test(unittest.TestCase):
         result = Hw10_Wordle.parsed_rule_code()
         self.assertEqual(result)
 
-    def test_apply_rule(self):
+    def test_apply_Rule(self):
         result = Hw10_Wordle.apply_rule()
         self.assertEqual(result)
 
