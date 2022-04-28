@@ -2,14 +2,16 @@ import collections
 import random
 import logging
 import string
+import sqlite3
 from collections import  OrderedDict
 
 class wordle:
+
     # of get() and set() method in
     # normal function
-
     def __init__(self, words=5):
         self.word = words
+        return self.word
 
     # getter method
 
@@ -22,6 +24,7 @@ class wordle:
     def set_words(self, wordle):
         print("setter method")
         self.word = wordle
+        return self.word
 
     # After using setter
     final_word.wordle(2019)
@@ -41,7 +44,14 @@ class wordle:
     def words_list_to_file(list):
         with open('valid_words.txt', 'w') as f_pointer:
             f_pointer.writelines([str(i) + '\n' for i in list])
+            try:
+                with open(filename) as f_pointer:
+                    contents = f_pointer.read()
+            except FileNotFoundError:
+                msg = "Sorry, the file " + f_pointer + "does not exist."
+                print(msg)  # Sorry, the file John.txt does not exist.
             f_pointer.close()
+
 
     def order(trials, user_input):  # function making file for storing in csv
         letter_list = OrderedDict()
@@ -251,6 +261,56 @@ def Interact(self):
             if test_words in self.words:
                 del self.words[self.words.index(test_words)]
         print(f'The word is {self.words[0]}, found in {j} attempts.')
+
+# A minimal SQLite shells for experiments
+        con = sqlite3.connect('example.db')
+        con.isolation_level = None
+        cur = con.cursor()
+
+        buffer = ""
+
+        print("Enter SQL commands to execute in sqlite3.")
+        print("Enter a blank line to exit.")
+
+        mydb_01 = sqlite3.connect(
+            host="localhost",
+            user="username",
+            password="userpassword",
+            database="mydatabase"
+        )
+
+        cur = sqlite3.connect()
+
+        sqlite3.connect("create table customer (name VARCHAR(255), address VARCHAR(255))")
+
+        mydb_02 = sqlite3.connect(
+            host="localhost",
+            user="username",
+            password="userpassword",
+            database="mydatabase"
+        )
+
+        cur = sqlite3.connect()
+
+        sqlite3.connect("create table customer (name VARCHAR(255), address VARCHAR(255))")
+
+        while True:
+            line = input()
+            if line == "":
+                break
+            buffer += line
+            if sqlite3.complete_statement(buffer):
+                try:
+                    buffer = buffer.strip()
+                    cur.execute(buffer)
+
+                    if buffer.lstrip().upper().startswith("SELECT"):
+                        print(cur.fetchall())
+                except sqlite3.Error as e:
+                    print("An error occurred:", e.args[0])
+                buffer = ""
+
+        con.close()
 
 def __str__(self):
     return 'a {self.words}wordle'
